@@ -1,15 +1,15 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <div @click="add">{{ name }}</div>
+  <div class="hello" @click="go">
+    <!-- <h1>Test {{count}}</h1> -->
   </div>
 </template>
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "Bar",
   props: {
     msg: String,
+    count:Number
   },
   data() {
     return {
@@ -18,28 +18,24 @@ export default {
     };
   },
   methods:{
-    add(){
-      this.name++
-    },
-    go(){
-      this.$router.push({path:"/foo"})
+      go(){
+       this.$router.go(-1)
     }
   },
-  beforeCreate(){
-    console.log('Hello beforeCreate');
-  },
   created() {
-    console.log('Hello created');
+    console.log('test ct');
   },
   mounted(){
-    console.log("Hello mounted");
-    console.log(document.querySelector("#main"))
+    console.log("test mounted");
   },
-  beforeUpdate() {
-    console.log("Hello beforeUpdate");
+   beforeUpdate(){
+    console.log("test beforeUpdate");
   },
   updated(){
-    console.log("Hello updated");
+     console.log("test Updated");
+  },
+  render(h){
+      return h("div",{},this.count)
   }
 };
 </script>

@@ -1,17 +1,35 @@
 <template>
-  <div id="app">
+  <div id="main">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <HelloWorld /> -->
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive">
+        12
+      </router-view>
+    </keep-alive>
+    <router-view  v-if="!$route.meta.keepAlive">
+      34
+    </router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+// import HelloWorld from "./components/HelloWorld.vue"
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components:{
+    // HelloWorld
+  },
+  data(){
+    return {
+      title:"home"
+    }
+  },
+  mounted() {
+    console.log("app Mounted")
+  },
+  updated(){
+    console.log("app updated");
   }
 }
 </script>

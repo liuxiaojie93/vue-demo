@@ -1,24 +1,34 @@
-# vue-demo
+# vue 源码
 
-## Project setup
-```
-yarn install
-```
+## 根实例
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+```js
+const main = new Vue({
+  router,
+  render: (h) => h(App),
+});
 
-### Compiles and minifies for production
-```
-yarn build
-```
+main.$mount("#app") ||
+  mountComponent(this, query("#app")) ||
+  callHook(vm, "beforeMount");
+updateComponent = function() {
+  vm._update(vm._render(), hydrating);
+};
 
-### Lints and fixes files
-```
-yarn lint
-```
+new Watcher(
+  vm,
+  updateComponent,
+  noop,
+  {
+    before: function before() {
+      if (vm._isMounted && !vm._isDestroyed) {
+        callHook(vm, "beforeUpdate");
+      }
+    },
+  },
+  true /* isRenderWatcher */
+);
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+updateComponent()
+
+```
