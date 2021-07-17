@@ -5,7 +5,9 @@ import VueRouter from 'vue-router'
 import store from "../src/store"
 console.log(store,"store");
 Vue.use(VueRouter)
+import { List } from 'vant';
 
+Vue.use(List);
 Vue.config.productionTip = false
 const main = new Vue({
   router,

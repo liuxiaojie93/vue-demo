@@ -5,7 +5,18 @@
     <!-- canvas -->
     <canvas id="canvas" width="500" height="500">
     </canvas>
-  </div>
+    <div class="box">
+       <van-list
+      v-model="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="onLoad"
+    >
+      <div v-for="item in list" :key="item">{{item}}</div>
+    </van-list>
+    </div>
+     
+</div>
 </template>
 
 <script>
@@ -19,9 +30,30 @@ export default {
     return {
       name: 12,
       age: 20,
+        loading: false,
+      finished: false,
+       list: [1],
     };
   },
   methods:{
+    onLoad() {
+      console.log("@@@-------------------onLoad");
+      // 异步更新数据
+      // setTimeout 仅做示例，真实场景中一般为 ajax 请求
+      setTimeout(() => {
+        for (let i = 0; i < 10; i++) {
+          this.list.push(this.list.length + 1);
+        }
+
+        // 加载状态结束
+        this.loading = false;
+
+        // 数据全部加载完成
+        if (this.list.length >= 40) {
+          this.finished = true;
+        }
+      }, 1000);
+    },
     add(){
       this.name++
     },
@@ -37,8 +69,7 @@ export default {
   },
   mounted(){
     console.log("Hello mounted");
-    console.log(document.querySelector("#main"));
-  const canvasEl = document.querySelector("#canvas");
+    const canvasEl = document.querySelector("#canvas");
     draw(canvasEl)
 
   },
@@ -53,6 +84,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.box{
+  height: 400px;
+  overflow: scroll;
+}
 canvas{
   border: 1px dashed red;
   /* width: 500px;
