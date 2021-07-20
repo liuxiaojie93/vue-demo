@@ -32,3 +32,17 @@ new Watcher(
 updateComponent()
 
 ```
+
+## axios 源码
+
+```js
+const axios 
+= createInstance() 
+= instance 
+= function(...args){
+    return Axios.prototype.request.apply(axios,args)
+  }
+
+
+
+```
